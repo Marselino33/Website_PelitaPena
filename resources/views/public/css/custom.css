@@ -1,0 +1,33 @@
+/* Add this CSS file to your project and include it in your layout */
+.hero-area {
+    position: relative;
+    background-color: #000;
+    color: white;
+    overflow: hidden;
+  }
+  
+  .hero-area img {
+    opacity: 0.7;
+    transition: transform 0.3s ease;
+  }
+  
+  .hero-area:hover img {
+    transform: scale(1.05);
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .qr-code-container img {
+    transition: transform 0.3s ease;
+  }
+  
+  .qr-code-container:hover img {
+    transform: scale(1.05);
+  }
+  
+  
