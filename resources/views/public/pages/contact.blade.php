@@ -10,7 +10,7 @@
             </div>
             
             <div class="row">
-                <div class="col-lg-6 mb-4">
+                 <div class="col-lg-6 mb-4">
                     <div class="contact-form-card p-4 bg-white rounded shadow-sm">
                         <h3 class="mb-4 fw-bold">Kirim kami pesan</h3>
                         
@@ -108,7 +108,15 @@
         </div>
     </div>
 @endsection
-
+<body>
+    <h2>Anda memiliki pesan baru dari form kontak:</h2>
+    <p><strong>Nama:</strong> {{ $data['name'] }}</p>
+    <p><strong>Email:</strong> {{ $data['email'] }}</p>
+    <p><strong>Subject:</strong> {{ $data['subject'] }}</p>
+    <hr>
+    <p><strong>Pesan:</strong></p>
+    <p>{{ nl2br(e($data['message'])) }}</p>
+</body>
 <style>
     body {
         font-family: 'Poppins', sans-serif;

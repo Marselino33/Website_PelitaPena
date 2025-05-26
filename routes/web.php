@@ -19,6 +19,10 @@ use App\Http\Controllers\Public\DonationPublicController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController; 
 use App\Http\Controllers\BackendController;
+use App\Http\Controllers\ContactController;
+
+Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.show');
+Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.send');
 
 // Admin Laporan - Detail per status
 Route::prefix('admin/laporan')->name('admin.laporan.')->group(function () {

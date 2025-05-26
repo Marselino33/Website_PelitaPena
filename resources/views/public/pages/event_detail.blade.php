@@ -46,6 +46,7 @@
                                             {{ $event['nama_event'] }}
                                         </h1>
                                         
+                                        
                                         <!-- Meta Info -->
                                         <div class="event-meta" style="display: flex; flex-wrap: wrap; gap: 15px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #eee;">
                                             <div class="meta-item" style="display: flex; align-items: center; color: #777; font-size: 14px;">
@@ -57,7 +58,10 @@
                                                 {{ \Carbon\Carbon::parse($event['created_at'])->locale('id')->diffForHumans() }}
                                             </div>
                                         </div>
-                                        
+                                                                        <h3 style="color: #2d3e69; font-size: 18px; font-weight: 600; margin: 20px 0; position: relative; padding-bottom: 10px;">
+                                    Deskripsi Lengkap
+                                    <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background-color: #7FBC8C; border-radius: 1px;"></span>
+                                </h3>
                                         <!-- Description Preview -->
                                         <div class="event-description-preview" style="color: #444; font-size: 15px; line-height: 1.7; margin-bottom: 20px; max-height: 300px; overflow-y: auto;">
                                             <p>{!! Str::limit(strip_tags($event['deskripsi_event']), 300, '...') !!}</p>
@@ -67,18 +71,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
-                            <!-- Full Description -->
-                            <div class="full-description" style="padding: 0 30px 30px;">
-                                <h3 style="color: #2d3e69; font-size: 18px; font-weight: 600; margin: 20px 0; position: relative; padding-bottom: 10px;">
-                                    Deskripsi Lengkap
-                                    <span style="position: absolute; bottom: 0; left: 0; width: 40px; height: 2px; background-color: #7FBC8C; border-radius: 1px;"></span>
-                                </h3>
-                                
-                                <div class="event-description" style="color: #444; font-size: 15px; line-height: 1.7;">
-                                    {!! $event['deskripsi_event'] !!}
-                                </div>
-                            </div>
+                        
                             
                             <!-- Location Map (if coordinates available) -->
                             @if(isset($event['lokasi_lat']) && isset($event['lokasi_long']))
