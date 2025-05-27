@@ -11,6 +11,10 @@ use RealRashid\SweetAlert\Facades\Alert;
 use App\Exports\LaporanExport;
 use Maatwebsite\Excel\Facades\Excel;    
 use App\Models\Laporan;
+use Illuminate\Support\Str;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;      // ← atau sesuai alias Anda
 
 class AdminLaporanController extends Controller
@@ -423,5 +427,116 @@ public function updateKorban(Request $request, $id)
 
         return redirect()->route('laporan.detail-diproses', ['no_registrasi' => $no]);
     }
-    
+public function create(Request $request)
+{
+    $headers   = ApiHelper::getAuthorizationHeader($request);
+    $usersResp = Http::withHeaders($headers)->get(env('API_URL').'api/admin/users');
+    $catsResp  = Http::withHeaders($headers)->get(env('API_URL').'api/admin/violence-categories');
+
+    $usersRaw      = $usersResp->successful() ? $usersResp->json('Data', []) : [];
+    $categoriesRaw = $catsResp->successful() ? $catsResp->json('Data', []) : [];
+
+    // normalisasi users (untuk berjaga jika key beda)
+    $users = array_map(function($u){
+        return [
+            'id'    => $u['id'] ?? $u['UserID'] ?? null,
+            'name'  => $u['nama'] ?? $u['name'] ?? ($u['Nama'] ?? '—'),
+            'email' => $u['email'] ?? ($u['Email'] ?? '-'),
+        ];
+    }, $usersRaw);
+
+    // normalisasi categories supaya selalu ada ['id','name']
+    $categories = array_map(function($c){
+        return [
+            'id'   => $c['id'] ?? $c['KategoriKekerasanID'] ?? $c['kategori_kekerasan_id'] ?? null,
+            'name' => $c['name'] ?? $c['nama'] ?? ($c['Nama'] ?? '—'),
+        ];
+    }, $categoriesRaw);
+
+    return view('admin.pages.laporan.create', compact('users', 'categories'))
+           ->with('title', 'Tambah Laporan');
+}
+
+
+    /**
+     * Simpan laporan baru ke API dan database.
+     */
+public function store(Request $request)
+{
+    // Validasi input
+    $validated = $request->validate([
+        'kategori_kekerasan_id' => 'required',
+        'tanggal_kejadian'      => 'required|date',
+        'kategori_lokasi_kasus' => 'required|string|max:255',
+        'alamat_tkp'            => 'required|string|max:255',
+        'alamat_detail_tkp'     => 'nullable|string|max:500',
+        'kronologis_kasus'      => 'required|string',
+        'dokumentasi.*'         => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+    ]);
+
+    // Generate no_registrasi
+    $month    = Carbon::now()->month;
+    $year     = Carbon::now()->year;
+    $romanMap = [1=>'I',2=>'II',3=>'III',4=>'IV',5=>'V',6=>'VI',7=>'VII',8=>'VIII',9=>'IX',10=>'X',11=>'XI',12=>'XII'];
+    $roman    = $romanMap[$month];
+    $baseNo   = "001-DPMDPPA-{$roman}-{$year}";
+
+    // Ambil semua existing untuk cek unik
+    $headers = ApiHelper::getAuthorizationHeader($request);
+    $list    = Http::withHeaders($headers)
+                   ->get(env('API_URL').'api/admin/laporans')
+                   ->json('Data', []);
+    $exists  = array_column($list, 'no_registrasi');
+
+    if (in_array($baseNo, $exists)) {
+        for ($i=2; $i<1000; $i++) {
+            $pad = str_pad($i,3,'0',STR_PAD_LEFT);
+            $cand = "{$pad}-DPMDPPA-{$roman}-{$year}";
+            if (! in_array($cand, $exists)) {
+                $baseNo = $cand;
+                break;
+            }
+        }
+    }
+
+    // Siapkan multipart tanpa _method
+    $multipart = [
+        ['name'=>'no_registrasi',        'contents'=>$baseNo],
+        ['name'=>'user_id',              'contents'=>auth()->id()],
+        ['name'=>'kategori_kekerasan_id','contents'=>$validated['kategori_kekerasan_id']],
+        ['name'=>'tanggal_kejadian',     'contents'=>$validated['tanggal_kejadian']],
+        ['name'=>'kategori_lokasi_kasus','contents'=>$validated['kategori_lokasi_kasus']],
+        ['name'=>'alamat_tkp',           'contents'=>$validated['alamat_tkp']],
+        ['name'=>'alamat_detail_tkp',    'contents'=>$validated['alamat_detail_tkp'] ?? ''],
+        ['name'=>'kronologis_kasus',     'contents'=>$validated['kronologis_kasus']],
+    ];
+
+    if ($request->hasFile('dokumentasi')) {
+        foreach ($request->file('dokumentasi') as $file) {
+            $multipart[] = [
+                'name'     => 'dokumentasi[]',
+                'contents' => fopen($file->getRealPath(), 'r'),
+                'filename' => $file->getClientOriginalName(),
+            ];
+        }
+    }
+
+    // Kirim POST multipart
+    $response = Http::withHeaders(ApiHelper::getAuthorizationHeader($request))
+                    ->asMultipart()
+                    ->post(
+                        rtrim(env('API_URL'), '/')
+                        .'/api/admin/create-laporan',
+                        $multipart
+                    );
+
+    if ($response->successful()) {
+        Alert::success('Sukses', 'Laporan berhasil ditambahkan.');
+        return redirect()->route('admin.laporan.daftar');
+    }
+
+    Alert::error('Gagal', 'Tidak dapat menyimpan laporan: '.$response->body());
+    return back()->withInput();
+}
+
 }

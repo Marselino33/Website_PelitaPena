@@ -20,6 +20,9 @@ use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\LoginController; 
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\ContactController;
+    // Daftar Laporan
+    Route::get('/laporan/daftar', [AdminLaporanController::class, 'daftar'])
+         ->name('laporan.daftar');
 
 Route::get('/contact', [ContactController::class, 'showForm'])->name('contact.show');
 Route::post('/contact', [ContactController::class, 'sendEmail'])->name('contact.send');
@@ -160,6 +163,13 @@ Route::get('/donasi', [DashboardPublicController::class, 'donasi'])
             'update'  => 'pages.donasi.update',
             'destroy' => 'pages.donasi.destroy',
         ]);
+            Route::get('/laporan/daftar', [AdminLaporanController::class, 'daftar'])
+         ->name('laporan.daftar');
+            // Tambah Laporan
+    Route::get('/laporan/tambah', [AdminLaporanController::class, 'create'])
+         ->name('laporan.create');
+    Route::post('/laporan/tambah', [AdminLaporanController::class, 'store'])
+         ->name('laporan.store');
     });
 
 Route::get('/donasi/{id}', [DashboardPublicController::class, 'detail'])
