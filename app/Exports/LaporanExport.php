@@ -3,14 +3,11 @@
 namespace App\Exports;
 
 use App\Models\Laporan;
-use Maatwebsite\Excel\Concerns\Exportable;      // ← import trait
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 
 class LaporanExport implements FromQuery, WithHeadings
 {
-    use Exportable;                               // ← gunakan trait
-
     protected $filters;
 
     public function __construct(array $filters = [])
@@ -22,12 +19,9 @@ class LaporanExport implements FromQuery, WithHeadings
     {
         $q = Laporan::query();
 
-        // Jika ada filter no_registrasi (dari selected[])
         if (!empty($this->filters['no_registrasi'])) {
             $q->whereIn('no_registrasi', $this->filters['no_registrasi']);
         }
-
-        // Tambahan filter status atau q jika perlu
         if (!empty($this->filters['status'])) {
             $q->where('status', $this->filters['status']);
         }

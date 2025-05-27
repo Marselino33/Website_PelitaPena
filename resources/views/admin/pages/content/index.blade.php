@@ -83,8 +83,8 @@
                 <div class="card border-0 shadow-sm rounded-4 p-5 text-center">
                     <div class="py-5">
                         <h2 class="mb-2">Belum ada Content</h2>
-                        <p class="text-muted mb-4">Sorry for the inconvenience but we're performing some maintenance at the moment</p>
-                        <a href="{{ route('content.create') }}" class="btn btn-primary">Buat Content</a>
+                        <p class="text-muted mb-4">Tambahkan Content terbaru anda</p>
+                        <!-- <a href="{{ route('content.create') }}" class="btn btn-primary">Buat Content</a> -->
                         <div class="mt-4">
                             <img src="asset-admin/assets/img/illustrations/girl-doing-yoga-light.png"
                                 alt="girl-doing-yoga-light" width="400" class="img-fluid"

@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use RealRashid\SweetAlert\Facades\Alert;
 use App\Exports\LaporanExport;
-use Maatwebsite\Excel\Facades\Excel;                   
+use Maatwebsite\Excel\Facades\Excel;    
+use App\Models\Laporan;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;      // ← atau sesuai alias Anda
 
 class AdminLaporanController extends Controller
@@ -327,35 +328,24 @@ public function lihat(Request $request)
     /**
      * Export daftar laporan ke Excel.
      */
+
 public function exportPdf(Request $request)
 {
-    // 1. Ambil semua laporan dari API, sama seperti di daftar()
-    $headers  = ApiHelper::getAuthorizationHeader($request);
-    $response = Http::withHeaders($headers)
-                    ->get(env('API_URL') . 'api/admin/laporans');
+    // Ambil selected dari query string
+    $selected = $request->input('selected');
 
-    $data = $response->successful()
-          ? $response->json('Data', [])
-          : [];
+    if (!$selected) {
+        return redirect()->back()->with('error', 'Tidak ada data yang dipilih.');
+    }
 
-    // 2. Tangkap daftar no_registrasi yg dicentang
-    $selected = $request->input('selected', []);
+    // Pecah string menjadi array
+    $selectedIds = explode(',', $selected);
 
-    // 3. Filter array berdasarkan selected[]
-    $laporans = array_filter($data, function($item) use ($selected) {
-        return in_array($item['no_registrasi'], $selected);
-    });
+    // Ambil laporan sesuai yang dipilih
+    $laporans = Laporan::with(['korban', 'pelaku'])->whereIn('no_registrasi', $selectedIds)->get();
 
-    // 4. Sortir jika perlu (misal by created_at)
-    usort($laporans, function($a, $b) {
-        return strtotime($b['created_at']) - strtotime($a['created_at']);
-    });
-
-    // 5. Render PDF dari view dengan array hasil filter
-    $pdf = PDF::loadView('admin.laporan.export_pdf', compact('laporans'))
-              ->setPaper('a4', 'landscape');
-
-    return $pdf->download('laporan_'.now()->format('Ymd_His').'.pdf');
+    $pdf = Pdf::loadView('admin.laporan.export_pdf', compact('laporans'))->setPaper('A4', 'portrait');
+    return $pdf->download('laporan-masyarakat.pdf');
 }
 /**
  * Update data korban.

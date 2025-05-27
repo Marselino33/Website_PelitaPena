@@ -10,9 +10,9 @@
         <div>
             <form id="logout-form" action="{{ route('logout') }}" method="POST">
                 @csrf
-                <button type="button" class="btn btn-sm btn-outline-danger" id="logout-button">
+                <!-- <button type="button" class="btn btn-sm btn-outline-danger" id="logout-button">
                     <i class="bx bx-log-out-circle"></i> Logout
-                </button>
+                </button> -->
             </form>
         </div>
     </div>

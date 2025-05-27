@@ -8,16 +8,20 @@
         <div class="card-header bg-gradient-primary text-white p-4">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="h4 font-weight-bold mb-0">Daftar Laporan</h1>
-                <!-- Tombol filter dan export yang lebih menonjol -->
                 <div class="d-flex">
                     <button type="button" id="filterButton" class="btn btn-warning btn-md rounded-pill mr-3 d-flex align-items-center font-weight-bold px-4 py-2 shadow">
                         <i class="fas fa-filter mr-2"></i> Filters
                     </button>
-                    <form id="exportForm" method="GET" action="{{ route('admin.laporan.export_pdf') }}">
+                    <!-- Export Form tetap GET sesuai route -->
+<form method="GET" action="{{ route('admin.laporan.export_pdf') }}" id="exportPdfForm">
+    <input type="hidden" name="selected" id="selectedInput">
+    <button style="background-color:green;" type="submit" class="btn btn-success btn-md rounded-pill d-flex align-items-center font-weight-bold px-4 py-2 shadow">Export</button>
+</form>
+                    <!-- <form id="exportForm" method="GET" action="{{ route('admin.laporan.export_pdf') }}">
                         <button type="submit" id="exportButton" class="btn btn-success btn-md rounded-pill d-flex align-items-center font-weight-bold px-4 py-2 shadow">
                             <i class="fas fa-file-export mr-2"></i> Eksport
                         </button>
-                    </form>
+                    </form> -->
                 </div>
             </div>
         </div>
@@ -48,10 +52,10 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-md-4 mb-3 mb-md-0">
+                        <!-- <div class="col-md-4 mb-3 mb-md-0">
                             <label class="small font-weight-bold text-uppercase mb-1">Tanggal</label>
                             <input type="date" name="date" class="form-control" value="{{ request('date') }}">
-                        </div>
+                        </div> -->
                         <div class="col-md-4">
                             <button type="submit" class="btn btn-primary btn-block rounded-pill">
                                 <i class="fas fa-filter mr-2"></i> Terapkan Filter
@@ -138,7 +142,7 @@
                                         $bgColor = '#e6f0ff'; $textColor = '#0066ff'; $statusText = 'Baru'; 
                                         $statusIcon = 'fa-inbox'; break;
                                     case 'Dilihat':
-                                        $bgColor = '#f0e6ff'; $textColor = '#6600cc'; $statusText = 'Dibaca'; 
+                                        $bgColor = '#f0e6ff'; $textColor = '#6600cc'; $statusText = 'Dilihat'; 
                                         $statusIcon = 'fa-eye'; break;
                                     case 'Diproses':
                                         $bgColor = '#fff2e6'; $textColor = '#ff8c1a'; $statusText = 'Proses'; 
@@ -421,102 +425,44 @@
 @push('scripts')
 <script>
     $(function() {
-        // Toggle filter form with animation
+        // Toggle filter form dengan animasi
         $('#filterButton').click(function() {
             $('#filterForm').toggleClass('show');
-            if ($('#filterForm').hasClass('show')) {
-                $('#filterForm').slideDown(300);
-            } else {
-                $('#filterForm').slideUp(300);
-            }
+            if ($('#filterForm').hasClass('show')) $('#filterForm').slideDown(300);
+            else $('#filterForm').slideUp(300);
         });
 
-        // Enhanced search with debounce
+        // Enhanced search dengan debounce
         let searchTimer;
         $('#searchInput').on('keyup', function(e) {
             clearTimeout(searchTimer);
-            
-            if (e.key === 'Enter') {
-                window.location.href = "{{ route('laporan.daftar') }}?q=" + $(this).val();
-                return;
-            }
-            
+            if (e.key === 'Enter') return window.location.href = "{{ route('laporan.daftar') }}?q=" + $(this).val();
             searchTimer = setTimeout(() => {
-                if ($(this).val().length >= 3) {
-                    window.location.href = "{{ route('laporan.daftar') }}?q=" + $(this).val();
-                }
+                if ($(this).val().length >= 3) window.location.href = "{{ route('laporan.daftar') }}?q=" + $(this).val();
             }, 500);
         });
 
-        // Select / Deselect all rows with animation
-        $('#selectAll').change(function() {
-            const isChecked = $(this).prop('checked');
-            
-            $('.rowCheckbox').each(function(index) {
-                const $this = $(this);
-                setTimeout(() => {
-                    $this.prop('checked', isChecked);
-                    $this.closest('tr').toggleClass('bg-light', isChecked);
-                }, index * 50); // Staggered animation
-            });
-        });
-        
-        // Individual row selection
-        $('.rowCheckbox').change(function() {
-            $(this).closest('tr').toggleClass('bg-light', $(this).prop('checked'));
-            
-            // Update selectAll checkbox
-            const totalRows = $('.rowCheckbox').length;
-            const selectedRows = $('.rowCheckbox:checked').length;
-            $('#selectAll').prop('checked', totalRows === selectedRows);
-        });
-
-        // Export form validation with enhanced UX - DIPERBAIKI AGAR SESUAI DENGAN KODE ASLI
+        // Export form: hanya kirim yang dicentang
         $('#exportForm').on('submit', function(e) {
             var $checked = $('.rowCheckbox:checked');
             if (!$checked.length) {
                 e.preventDefault();
-                
-                // Show animated notification instead of alert
-                const notification = $('<div class="alert alert-warning alert-dismissible fade show" role="alert">' +
-                    '<strong><i class="fas fa-exclamation-triangle mr-2"></i> Perhatian!</strong> Silakan pilih minimal satu laporan untuk di-export.' +
-                    '<button type="button" class="close" data-dismiss="alert" aria-label="Close">' +
-                    '<span aria-hidden="true">&times;</span>' +
-                    '</button>' +
-                    '</div>');
-                
-                notification.css({
-                    'position': 'fixed',
-                    'top': '20px',
-                    'right': '20px',
-                    'z-index': '9999',
-                    'max-width': '300px',
-                    'box-shadow': '0 0.5rem 1rem rgba(0,0,0,0.15)',
-                    'border-radius': '10px',
-                    'opacity': '0',
-                    'transform': 'translateY(-20px)'
-                });
-                
+                const notification = $('<div class="alert alert-warning alert-dismissible fade show" role="alert">'
+                    + '<strong><i class="fas fa-exclamation-triangle mr-2"></i> Perhatian!</strong> Silakan pilih minimal satu laporan untuk di-export.'
+                    + '<button type="button" class="close" data-dismiss="alert" aria-label="Close">'
+                    + '<span aria-hidden="true">&times;</span>'
+                    + '</button>'
+                    + '</div>');
+                notification.css({position: 'fixed', top: '20px', right: '20px', zIndex: '9999'});
                 $('body').append(notification);
-                
-                // Animate in
-                notification.animate({
-                    opacity: 1,
-                    transform: 'translateY(0)'
-                }, 300);
-                
-                // Auto dismiss after 5 seconds
-                setTimeout(() => {
-                    notification.alert('close');
-                }, 5000);
-                
+                setTimeout(() => notification.alert('close'), 5000);
                 return;
             }
-            
+
             // Hapus input selected[] lama
             $(this).find('input[name="selected[]"]').remove();
-            
-            // Tambahkan field selected[] untuk setiap yang dicentang - PERBAIKAN DISINI
+
+            // Tambahkan hidden input untuk setiap terpilih
             $checked.each(function() {
                 $('<input>')
                     .attr('type', 'hidden')
@@ -525,34 +471,40 @@
                     .appendTo('#exportForm');
             });
 
-            // Sertakan param filter/search saat ini - PERBAIKAN DISINI
+            // Sertakan parameter filter/search saat ini
             var params = new URLSearchParams(window.location.search);
             params.forEach(function(v, k) {
                 if (k !== 'selected') {
                     $('<input>')
                         .attr('type', 'hidden')
-                        .attr('name', k + '[]') // Menambahkan [] seperti di kode asli
+                        .attr('name', k)
                         .val(v)
                         .appendTo('#exportForm');
                 }
             });
-            
-            // Show loading spinner on button
+
+            // Indikator loading
             $('#exportButton').html('<i class="fas fa-spinner fa-spin mr-2"></i> Memproses...');
         });
-        
-        // Row hover effect for better UX
-        $('.report-row').hover(
-            function() {
-                $(this).find('.badge').addClass('shadow-sm');
-            },
-            function() {
-                $(this).find('.badge').removeClass('shadow-sm');
-            }
-        );
-        
-        // Initialize tooltips
-        $('[data-toggle="tooltip"]').tooltip();
     });
+</script>
+<script>
+document.getElementById('exportPdfForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const selectedCheckboxes = document.querySelectorAll('input[name="selected[]"]:checked');
+    const selectedIds = Array.from(selectedCheckboxes).map(cb => cb.value);
+
+    if (selectedIds.length === 0) {
+        alert('Pilih minimal satu laporan untuk diekspor!');
+        return;
+    }
+
+    // Simpan ID sebagai query string dalam input hidden
+    document.getElementById('selectedInput').value = selectedIds.join(',');
+
+    // Lanjut submit
+    this.submit();
+});
 </script>
 @endpush

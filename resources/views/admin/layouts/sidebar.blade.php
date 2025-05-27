@@ -73,7 +73,7 @@
                 <li class="menu-item {{ \Route::is('janji-temu.index') || \Route::is('janji-temu.detail') ? 'active' : '' }}">
                     <a href="{{ route('janji-temu.index') }}" class="menu-link">
                         <i class="menu-icon tf-icons bx bx-time"></i>
-                        <div data-i18n="Analytics">Belum Disetujui</div>
+                        <div data-i18n="Analytics">Permintaan janji temu</div>
                     </a>
                 </li>
                 <li class="menu-item {{ \Route::is('janji-temu.disetujui') || \Route::is('janji-temu.detail-disetujui') ? 'active' : '' }}">

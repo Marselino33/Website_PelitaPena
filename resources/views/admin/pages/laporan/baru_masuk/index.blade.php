@@ -9,16 +9,16 @@
         </button> --}}
     </div>
     <div class="card-body">
-        <div class="row mb-4">
+        <div class="row mb-4"> 
             <div class="col-md-6">
-                <div class="input-group">
+                <!-- <div class="input-group">
                     <span class="input-group-text bg-white border-end-0">
                         <i class="bx bx-search"></i>
                     </span>
                     <input type="text" class="form-control border-start-0" placeholder="Pencaharian" id="searchInput">
-                </div>
+                </div> -->
             </div>
-            <div class="col-md-6 d-flex justify-content-end gap-2">
+            <!-- <div class="col-md-6 d-flex justify-content-end gap-2">
                 <div class="dropdown">
                     <button class="btn btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bx bx-filter me-1"></i> Filters
@@ -30,10 +30,10 @@
                         <li><a class="dropdown-item" href="#" data-filter="proses">Proses</a></li>
                         <li><a class="dropdown-item" href="#" data-filter="selesai">Selesai</a></li>
                     </ul>
-                </div>
-                <button class="btn btn-outline-secondary" id="exportBtn">
+                </div> -->
+                <!-- <button class="btn btn-outline-secondary" id="exportBtn">
                     <i class="bx bx-export me-1"></i> Eksport
-                </button>
+                </button> -->
             </div>
         </div>
 

@@ -41,18 +41,18 @@
                                             class="form-control"value="{{ $profile['phone_number'] }}">
                                     </div>
                                 </div>
-                                <div class="mb-3 col-md-6">
+                                <!-- <div class="mb-3 col-md-6">
                                     <label for="timeZones" class="form-label">Timezone</label>
                                     <select id="timeZones" class="select2 form-select">
                                         <option value="-4">(GMT-04:00) Caracas, La Paz</option>
                                     </select>
-                                </div>
+                                </div> -->
 
                             </div>
-                            <div class="mt-2">
+                            <!-- <div class="mt-2">
                                 <button type="submit" class="btn btn-primary me-2">Save changes</button>
                                 <button type="reset" class="btn btn-outline-secondary">Cancel</button>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                 </div>

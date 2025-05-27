@@ -3,10 +3,20 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Korban extends Model
 {
+        use HasFactory;
+
     protected $table = 'korbans';
+    protected $guarded = [];
+
+    // public function laporan()
+    // {
+    //     return $this->belongsTo(Laporan::class, 'no_registrasi', 'no_registrasi');
+    // }
+    // protected $table = 'korbans';
 
     protected $fillable = [
         'no_registrasi',

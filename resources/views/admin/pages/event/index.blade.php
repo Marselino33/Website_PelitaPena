@@ -90,7 +90,7 @@
                         <div class="py-5">
                             <h2 class="mb-2 fw-bold">Belum ada Event</h2>
                             <p class="text-muted mb-4">Belum ada event yang dijadwalkan saat ini. Buat event baru untuk memulai.</p>
-                            <a href="{{ route('event.create') }}" class="btn btn-primary rounded-pill px-4 py-2">Buat Event</a>
+                            <!-- <a href="{{ route('event.create') }}" class="btn btn-primary rounded-pill px-4 py-2">Buat Event</a> -->
                             <div class="mt-4">
                                 <img src="asset-admin/assets/img/illustrations/girl-doing-yoga-light.png"
                                     alt="girl-doing-yoga-light" width="400" class="img-fluid"

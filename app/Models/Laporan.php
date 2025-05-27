@@ -6,11 +6,26 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Laporan extends Model
 {
+    use HasFactory;
+
+    protected $table = 'laporans'; // atau 'laporan' jika sesuai
+    protected $guarded = [];
+
+    public function korban()
+    {
+        return $this->hasMany(Korban::class, 'no_registrasi', 'no_registrasi');
+    }
+
+    public function pelaku()
+    {
+        return $this->hasMany(Pelaku::class, 'no_registrasi', 'no_registrasi');
+    }
     // Nama tabel (default plural dari class)
-    protected $table = 'laporans';
+    // protected $table = 'laporans';
 
     // Primary key berupa string (no_registrasi)
     protected $primaryKey = 'no_registrasi';

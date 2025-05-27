@@ -339,10 +339,11 @@
                                             <hr />
                                             <div class="d-flex justify-content-between flex-wrap gap-2">
                                                 <div class="d-flex flex-wrap">
-                                                    <div class="avatar me-3">
-                                                        <img src="{{ !empty($laporanDetailDiproses['User']['photo_profile']) ? $laporanDetailDiproses['User']['photo_profile'] : asset('asset-admin/assets/img/avatars/no_photo.png') }}"
-                                                            alt="Avatar" class="rounded-circle" />
-                                                    </div>
+                                               <div class="avatar me-3">
+    <img src="{{ !empty($laporanDetailDiproses['User']['photo_profile']) ? $laporanDetailDiproses['User']['photo_profile'] : 'https://www.w3schools.com/howto/img_avatar.png' }}"
+        alt="Avatar" class="rounded-circle" />
+</div>
+
                                                     <div>
                                                         <p class="mb-0">{{ $laporanDetailDiproses['user_melihat']['full_name'] }}</p>
                                                         <span>{{ $laporanDetailDiproses['user_melihat']['role'] }}</span>
@@ -425,11 +426,11 @@
                                             aria-describedby="basic-icon-default-email2">
                                     </div>
                                 </div>
-                                <div class="mb-3 col-md-6">
+                                <!-- <div class="mb-3 col-md-6">
                                     <label for="organization" class="form-label">Tempat, tanggal Lahir</label>
                                     <input type="text" class="form-control" id="organization" name="organization"
                                         value="{{ $laporanDetailDiproses['User']['tempat_lahir'] }}, {{ $laporanDetailDiproses['User']['tanggal_lahir'] }}">
-                                </div>
+                                </div> -->
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label" for="phoneNumber">Nomor Handphone</label>
                                     <div class="input-group input-group-merge">
@@ -444,11 +445,11 @@
                                         value="{{ $laporanDetailDiproses['User']['jenis_kelamin'] }}" id="jenis_kelamin"
                                         name="jenis_kelamin">
                                 </div> -->
-                                <div class="mb-3 col-md-6">
+                                <!-- <div class="mb-3 col-md-6">
                                     <label for="state" class="form-label">Alamat</label>
                                     <input class="form-control" type="text" id="state" name="state"
                                         value="Alamat">
-                                </div>
+                                </div> -->
                                 <!-- <div class="mb-3 col-md-6">
                                     <label for="zipCode" class="form-label">Zip Code</label>
                                     <input type="text" class="form-control" id="zipCode" name="zipCode"

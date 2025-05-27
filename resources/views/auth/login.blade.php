@@ -277,9 +277,9 @@
                         <button class="btn btn-login d-grid w-100" type="submit">Login</button>
                     </div>
                     
-                    <div class="divider">
+                    <!-- <div class="divider">
                         <span>Or sign up with</span>
-                    </div>
+                    </div> -->
                 </form>
             </div>
         </div>
