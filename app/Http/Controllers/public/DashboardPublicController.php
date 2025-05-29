@@ -15,7 +15,7 @@ class DashboardPublicController extends Controller
     {
 
         return view('public.pages.welcome', [
-            'title' => 'Selamat Datang di Apliaksi Pelita Pena'
+            'title' => 'Selamat Datang di Apliaksi SIGAP'
         ]);
     }
 
@@ -54,7 +54,7 @@ public function index()
     public function feature()
     {
         return view('public.pages.feature', [
-            'title' => 'Fitur Aplikasi Pelita Pena'
+            'title' => 'Fitur Aplikasi SIGAP'
         ]);
     }
 
@@ -92,7 +92,7 @@ public function index()
         $recentPosts = $contents->sortByDesc('created_at')->take(5);
 
         return view('public.pages.content', [
-            'title' => 'Blog Pelita Pena',
+            'title' => 'Blog SIGAP',
             'contents' => $paginatedContents,
             'recent_posts' => $recentPosts,
             'violence_categories' => $violenceCategories
@@ -126,7 +126,7 @@ public function index()
         $recentPosts = $contents->sortByDesc('created_at')->take(5);
 
         return view('public.pages.content', [
-            'title' => 'Blog Pelita Pena',
+            'title' => 'Blog SIGAP',
             'contents' => $paginatedContents,
             'recent_posts' => $recentPosts,
             'noResults' => $contents->isEmpty() // Add a flag for no results
@@ -171,7 +171,7 @@ public function index()
         $recentPosts = $contents->sortByDesc('created_at')->take(5);
 
         return view('public.pages.content', [
-            'title' => 'Blog Pelita Pena',
+            'title' => 'Blog SIGAP',
             'contents' => $paginatedContents,
             'recent_posts' => $recentPosts,
             'violence_categories' => $violenceCategories,

@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <base href="/public">
-    <title>Pelita Pena – Lupa Password</title>
+    <title>SIGAP – Lupa Password</title>
     <meta name="description" content="">
     <link rel="icon" type="image/x-icon" href="asset-admin/assets/img/favicon/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -211,9 +211,9 @@
         <div class="login-sidebar">
             <div class="logo-container">
                 <div class="logo-icon">
-                    <img src="assets/img/logo1.png" alt="Pelita Pena Logo" width="30" height="30">
+                    <img src="assets/img/logo1.png" alt="SIGAP Logo" width="30" height="30">
                 </div>
-                <span class="logo-text">Pelita Pena</span>
+                <span class="logo-text">SIGAP</span>
             </div>
             
             <div class="admin-text">

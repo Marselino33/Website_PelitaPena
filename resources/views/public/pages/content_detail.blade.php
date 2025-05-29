@@ -8,7 +8,7 @@
                 <div class="col-lg-8">
                     <div class="section-tittle text-center">
                         <h2 style="color: #2d3e69; font-weight: 700; position: relative; display: inline-block; font-size: 26px; margin-bottom: 5px;">
-                            Pelita Pena
+                            SIGAP
                             <span style="position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background-color: #7FBC8C; border-radius: 2px;"></span>
                         </h2>
                     </div>

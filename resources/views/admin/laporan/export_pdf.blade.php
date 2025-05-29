@@ -21,7 +21,7 @@
 <body>
   <div class="header">
     <img src="{{ public_path('assets/img/logo/new_logo.svg') }}" alt="Logo">
-    <div class="institution">PELITA PENA</div>
+    <div class="institution">SIGAP</div>
     <div class="sub">DPMDPPA • Jl. Setia Budi No.154, Lumpo, Iv Jurai, Pesisir Selatan, Sumbar 25651</div>
   </div>
 

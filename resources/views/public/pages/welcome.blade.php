@@ -7,11 +7,11 @@
         <div class="row align-items-center">
             <div class="col-lg-6">
             <h1 class="mb-4" style="font-size: 3rem; color: #2d3e69; font-weight: bold; font-family: 'Poppins', sans-serif;">
-   Hadapi Kekerasan dengan Pelita Pena
+   Hadapi Kekerasan dengan SIGAP
         </h1>
 
                 <p class="mb-4" style="color: #666; font-size: 1.1rem;">
-                Hadapi Kekerasan dengan Pelita Pena, Solusi Cerdas untuk Mengatasi Ancaman dan Menciptakan Keamanan Bersama.      
+                Hadapi Kekerasan dengan SIGAP, Solusi Cerdas untuk Mengatasi Ancaman dan Menciptakan Keamanan Bersama.      
             </p>
                 <div class="hero-buttons">
                     {{-- <button class="btn" style="background-color: #7FBC8C; color: white; padding: 8px 30px; border-radius: 5px; border: none; margin-right: 15px;">
@@ -24,7 +24,7 @@
                 </div>
             </div>
             <div class="col-lg-6">
-                <img src="assets/img/hero/app.png" alt="Pelita Pena Screenshot" class="img-fluid" style="max-width: 80%; margin-left: auto; display: block;">
+                <img src="assets/img/hero/app.png" alt="SIGAP Screenshot" class="img-fluid" style="max-width: 100%; margin-left: auto; display: block;width: 550px;">
             </div>
         </div>
     </div>
@@ -38,16 +38,16 @@
             <div class="col-lg-6 mb-5 mb-lg-0">
                 <!-- Label kecil di atas -->
                 <p style="color: #79B2E1; font-weight: 600; margin-bottom: 0;">
-                    Pelita Pena
+                    SIGAP
                 </p>
                 <!-- Judul besar -->
                 <h2 style="color: #121127; font-weight: bold; margin: 10px 0 20px; font-size: 2rem;font-family: 'Poppins'">
-                    Tentang Aplikasi Pelita Pena
+                    Tentang Aplikasi SIGAP
                 </h2>
                 <!-- Deskripsi singkat -->
-                <p style="color: #666; margin-bottom: 20px;">Pelita Pena adalah aplikasi yang memudahkan masyarakat melaporkan kekerasan terhadap anak dan perempuan secara cepat, aman, dan rahasia.
+                <p style="color: #666; margin-bottom: 20px;">SIGAP adalah aplikasi yang memudahkan masyarakat melaporkan kekerasan terhadap anak dan perempuan secara cepat, aman, dan rahasia.
                     <br>
-Selain pelaporan, aplikasi ini menyediakan informasi edukatif, layanan chat,pelacakan laporan, dan janji temu. Dengan tampilan yang sederhana, Pelita Pena hadir sebagai solusi praktis untuk menciptakan lingkungan yang lebih aman dan peduli.</p>
+Selain pelaporan, aplikasi ini menyediakan informasi edukatif, layanan chat,pelacakan laporan, dan janji temu. Dengan tampilan yang sederhana, SIGAP hadir sebagai solusi praktis untuk menciptakan lingkungan yang lebih aman dan peduli.</p>
                 <!-- Tombol Download -->
                 <!-- <button class="btn"
                         >
@@ -115,7 +115,7 @@ Selain pelaporan, aplikasi ini menyediakan informasi edukatif, layanan chat,pela
             <!-- Kolom Kanan: Judul + Langkah-langkah -->
             <div class="col-lg-7">
                 <h2 style="color: #2d3e69; font-weight: bold; font-size: 2rem; margin-bottom: 30px; font-family: 'Poppins'; max-width:500px;">
-                    Tutorial Penggunaan Aplikasi Pelita Pena
+                    Tutorial Penggunaan Aplikasi SIGAP
                 </h2>
 
                 <!-- Daftar Langkah -->

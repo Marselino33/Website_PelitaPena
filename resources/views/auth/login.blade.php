@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <base href="/public">
-    <title>Pelita Pena – Admin Login</title>
+    <title>SIGAP – Admin Login</title>
     <meta name="description" content="">
     <link rel="icon" type="image/x-icon" href="asset-admin/assets/img/favicon/favicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -205,7 +205,7 @@
                 <div class="logo-icon">
                     <img src="assets/img/logo1.png" alt="Minus Icon" width="50" height="50">
                 </div>
-                <span class="logo-text">Pelita Pena</span>
+                <span class="logo-text">SIGAP</span>
             </div>
             
             <div class="admin-text">
