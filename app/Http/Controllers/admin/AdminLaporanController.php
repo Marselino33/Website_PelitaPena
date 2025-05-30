@@ -431,7 +431,7 @@ public function create(Request $request)
 {
     $headers   = ApiHelper::getAuthorizationHeader($request);
     $usersResp = Http::withHeaders($headers)->get(env('API_URL').'api/admin/users');
-    $catsResp  = Http::withHeaders($headers)->get(env('API_URL').'api/admin/violence-categories');
+    $catsResp  = Http::withHeaders($headers)->get(env('API_URL').'api/private/kategori-kekerasan');
 
     $usersRaw      = $usersResp->successful() ? $usersResp->json('Data', []) : [];
     $categoriesRaw = $catsResp->successful() ? $catsResp->json('Data', []) : [];
@@ -448,8 +448,8 @@ public function create(Request $request)
     // normalisasi categories supaya selalu ada ['id','name']
     $categories = array_map(function($c){
         return [
-            'id'   => $c['id'] ?? $c['KategoriKekerasanID'] ?? $c['kategori_kekerasan_id'] ?? null,
-            'name' => $c['name'] ?? $c['nama'] ?? ($c['Nama'] ?? '—'),
+            'id'   => $c['id'] ?? $c['id'] ?? $c['id'] ?? null,
+            'name' => $c['category_name'] ?? $c['category_name'] ?? ($c['category_name'] ?? '—'),
         ];
     }, $categoriesRaw);
 
@@ -514,7 +514,7 @@ public function store(Request $request)
     if ($request->hasFile('dokumentasi')) {
         foreach ($request->file('dokumentasi') as $file) {
             $multipart[] = [
-                'name'     => 'dokumentasi[]',
+                'name'     => 'dokumentasi',
                 'contents' => fopen($file->getRealPath(), 'r'),
                 'filename' => $file->getClientOriginalName(),
             ];

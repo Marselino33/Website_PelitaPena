@@ -25,7 +25,7 @@
 
         <div class="form-group">
           <label for="kategori_kekerasan_id">Kategori Kekerasan</label>
-          <select name="kategori_kekerasan_id" id="kategori_kekerasan_id" class="form-control">
+          <!-- <select name="kategori_kekerasan_id" id="kategori_kekerasan_id" class="form-control">
             <option value="">-- Pilih Kategori --</option>
             @foreach($categories as $c)
               <option value="{{ $c['id'] }}"
@@ -33,7 +33,17 @@
                 {{ $c['name'] }}
               </option>
             @endforeach
-          </select>
+          </select> -->
+
+          <select name="kategori_kekerasan_id" id="kategori_kekerasan_id" class="form-control">
+    <option value="">-- Pilih Kategori --</option>
+    @foreach($categories as $c)
+        <option value="{{ $c['id'] }}"
+            {{ old('kategori_kekerasan_id') == $c['id'] ? 'selected' : '' }}>
+            {{ $c['name'] }}
+        </option>
+    @endforeach
+</select>
         </div>
 
         <div class="row">
@@ -84,5 +94,6 @@
       </form>
     </div>
   </div>
+  
 </div>
 @endsection
