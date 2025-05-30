@@ -73,24 +73,41 @@
                                     <h5 class="card-header">Dokumentasi</h5>
                                     <div class="card-body">
                                         <div class="d-flex align-items-start align-items-sm-center gap-4">
-                                        @foreach ($laporanDetailDiproses['dokumentasi']['urls'] as $key => $url)
+@foreach (($laporanDetailDiproses['dokumentasi']['urls'] ?? []) as $key => $url)
     @php
-        $pathInfo = pathinfo($url);
-        $extension = isset($pathInfo['extension']) ? strtolower($pathInfo['extension']) : null;
+        $pathInfo  = pathinfo($url);
+        $extension = isset($pathInfo['extension'])
+                     ? strtolower($pathInfo['extension'])
+                     : null;
     @endphp
-    @if ($extension && in_array($extension, ['png', 'jpg', 'jpeg', 'gif']))
-        <img src="{{ $url }}" alt="dokumentasi" class="d-block rounded document-img"
-             height="100" width="100" data-bs-toggle="modal" data-bs-target="#modalCenter"
-             data-type="image" data-image-url="{{ $url }}">
-    @elseif ($extension && in_array($extension, ['mp4', 'mov', 'avi', 'mkv', 'webm']))
-        <video controls class="d-block rounded document-video" height="100" width="100"
-               data-bs-toggle="modal" data-bs-target="#modalCenter" data-type="video"
-               data-video-url="{{ $url }}">
+
+    @if ($extension && in_array($extension, ['png','jpg','jpeg','gif']))
+        <img
+            src="{{ $url }}"
+            data-image-url="{{ $url }}"
+            class="document-img"
+            alt="Foto #{{ $key + 1 }}"
+            style="max-width:100%; margin-bottom:1rem;"
+        >
+    @elseif ($extension && in_array($extension, ['mp4','mov','avi','mkv','webm']))
+        <video
+            controls
+            data-video-url="{{ $url }}"
+            data-extension="{{ $extension }}"
+            class="document-video"
+            style="max-width:100%; display:block; margin-bottom:1rem;"
+        >
             <source src="{{ $url }}" type="video/{{ $extension }}">
-            Your browser does not support the video tag.
+            Browser Anda tidak mendukung video tag.
         </video>
+    @else
+        <p style="font-style:italic; color:#666;">
+            Tidak ada media yang bisa ditampilkan untuk item #{{ $key + 1 }}.
+        </p>
     @endif
 @endforeach
+
+
 
                                         </div>
                                     </div>
@@ -226,9 +243,10 @@
                                                             <span>{{ \Carbon\Carbon::parse($tracking['created_at'])->format('d M Y') }}</span>
                                                         </div>
                                                         <p>
-                                                            @foreach ($tracking['document']['urls'] as $url)
-                                                                <a href="{{ $url }}" target="_blank">Document</a><br>
-                                                            @endforeach
+@foreach (($tracking['document']['urls'] ?? []) as $url)
+    <a href="{{ $url }}" target="_blank">Document</a><br>
+@endforeach
+
                                                         </p>
                                                     </div>
                                                     <div class="mt-3 mt-sm-0">
@@ -1269,31 +1287,33 @@
 </script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const documentImgs = document.querySelectorAll(".document-img");
-        const documentVideos = document.querySelectorAll(".document-video");
-        const modalContent = document.getElementById("modalContent");
+document.addEventListener("DOMContentLoaded", function() {
+    const documentImgs   = document.querySelectorAll(".document-img");
+    const documentVideos = document.querySelectorAll(".document-video");
+    const modalContent   = document.getElementById("modalContent");
 
-        documentImgs.forEach(img => {
-            img.addEventListener("click", function() {
-                const imageUrl = this.getAttribute("data-image-url");
-                modalContent.innerHTML =
-                    `<img src="${imageUrl}" alt="dokumentasi" class="img-fluid">`;
-            });
-        });
-
-        documentVideos.forEach(video => {
-            video.addEventListener("click", function() {
-                const videoUrl = this.getAttribute("data-video-url");
-                modalContent.innerHTML = `
-                    <video controls class="img-fluid">
-                        <source src="${videoUrl}" type="video/{{ $extension }}">
-                        Your browser does not support the video tag.
-                    </video>`;
-            });
+    documentImgs.forEach(img => {
+        img.addEventListener("click", function() {
+            const imageUrl = this.dataset.imageUrl;
+            modalContent.innerHTML =
+                `<img src="${imageUrl}" alt="dokumentasi" class="img-fluid">`;
         });
     });
+
+    documentVideos.forEach(video => {
+        video.addEventListener("click", function() {
+            const videoUrl   = this.dataset.videoUrl;
+            const extension  = this.dataset.extension;  // ambil extension dari data-attribute
+            modalContent.innerHTML = `
+                <video controls class="img-fluid">
+                    <source src="${videoUrl}" type="video/${extension}">
+                    Your browser does not support the video tag.
+                </video>`;
+        });
+    });
+});
 </script>
+
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

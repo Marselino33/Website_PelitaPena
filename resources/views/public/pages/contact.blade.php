@@ -10,35 +10,35 @@
             </div>
             
             <div class="row">
-                 <div class="col-lg-6 mb-4">
+                <div class="col-lg-6 mb-4">
                     <div class="contact-form-card p-4 bg-white rounded shadow-sm">
                         <h3 class="mb-4 fw-bold">Kirim kami pesan</h3>
                         
-                        <form class="form-contact" action="contact_process.php" method="post" id="contactForm" novalidate="novalidate">
-                            <div class="row mb-3">
-                                <div class="col-md-6 mb-3 mb-md-0">
-                                    <label for="name" class="form-label d-block mb-2">Nama</label>
-                                    <input type="text" class="form-control border" id="name" name="name" placeholder="Enter your name">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label d-block mb-2">Email</label>
-                                    <input type="email" class="form-control border" id="email" name="email" placeholder="Enter your email">
-                                </div>
-                            </div>
-                            
-                            <div class="mb-3">
-                                <label for="subject" class="form-label d-block mb-2">Subject</label>
-                                <input type="text" class="form-control border" id="subject" name="subject" placeholder="bagaimana kami dapat membantu anda?">
-                            </div>
-                            
-                            <div class="mb-4">
-                                <label for="message" class="form-label d-block mb-2">Pesan</label>
-                                <input type="text" style="height:200px" class="form-control border" id="subject" name="subject" placeholder="Tulis pesan anda di sini...">
-                                <!-- <textarea style="height:50px" class="form-control border" id="message" name="message" rows="3" placeholder="Tulis pesan anada di sini..."></textarea> -->
-                            </div>
-                            
-                            <button type="submit" style="background-color:#79B2E1" class="btn btn-primary w-100 rounded-pill">Kirim Email Sekarang →</button>
-                        </form>
+<form onsubmit="sendEmail(event)">
+    <div class="row mb-3">
+        <div class="col-md-6 mb-3 mb-md-0">
+            <label for="name" class="form-label d-block mb-2">Nama</label>
+            <input type="text" class="form-control border" id="name" placeholder="Enter your name">
+        </div>
+        <div class="col-md-6">
+            <label for="email" class="form-label d-block mb-2">Email</label>
+            <input type="email" class="form-control border" id="email" placeholder="Enter your email">
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <label for="subject" class="form-label d-block mb-2">Subject</label>
+        <input type="text" class="form-control border" id="subject" placeholder="Bagaimana kami dapat membantu anda?">
+    </div>
+
+    <div class="mb-4">
+        <label for="message" class="form-label d-block mb-2">Pesan</label>
+        <textarea class="form-control border" id="message" placeholder="Tulis pesan anda di sini..." rows="5"></textarea>
+    </div>
+
+    <button type="submit" style="background-color:#79B2E1" class="btn btn-primary w-100 rounded-pill">Kirim Email Sekarang →</button>
+</form>
+
                     </div>
                 </div>
                 
@@ -108,15 +108,7 @@
         </div>
     </div>
 @endsection
-<body>
-    <h2>Anda memiliki pesan baru dari form kontak:</h2>
-    <p><strong>Nama:</strong> {{ $data['name'] }}</p>
-    <p><strong>Email:</strong> {{ $data['email'] }}</p>
-    <p><strong>Subject:</strong> {{ $data['subject'] }}</p>
-    <hr>
-    <p><strong>Pesan:</strong></p>
-    <p>{{ nl2br(e($data['message'])) }}</p>
-</body>
+
 <style>
     body {
         font-family: 'Poppins', sans-serif;
@@ -234,3 +226,17 @@
     /* Add Poppins font */
     @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
 </style>
+<script>
+function sendEmail(event) {
+    event.preventDefault();
+
+    const name = document.getElementById("name").value || "";
+    const email = document.getElementById("email").value || "";
+    const subject = document.getElementById("subject").value || "";
+    const message = document.getElementById("message").value || "";
+
+    const mailtoLink = `mailto:samuelsitorus100904@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent("Nama: " + name + "\nEmail: " + email + "\n\nPesan:\n" + message)}`;
+    
+    window.location.href = mailtoLink;
+}
+</script>

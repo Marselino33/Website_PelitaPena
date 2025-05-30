@@ -31,9 +31,9 @@
                                 <li class="{{ \Route::is('contact') ? 'active' : '' }}">
                                     <a href="{{ route('contact') }}">Kontak</a>
                                 </li>
-                                <li class="{{ \Route::is('donasi') ? 'active' : '' }}">
+                                <!-- <li class="{{ \Route::is('donasi') ? 'active' : '' }}">
                                     <a href="{{ route('donasi') }}">Donasi</a>
-                                </li>
+                                </li> -->
                             </ul>
                         </nav>
                     </div>

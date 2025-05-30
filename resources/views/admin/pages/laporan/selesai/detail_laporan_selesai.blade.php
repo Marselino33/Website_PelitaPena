@@ -357,11 +357,11 @@
                             <form>
                                 <input type="text" name="{{ $korban['no_registrasi'] }}" hidden>
                                 <div class="row">
-                                    <div class="mb-3 col-md-6">
+                                    <!-- <div class="mb-3 col-md-6">
                                         <label for="nik" class="form-label">NIK (Nomor Induk kependudukan)</label>
                                         <input class="form-control" type="number" value="{{ $korban['nik_korban'] }}"
                                             name="nik" disabled>
-                                    </div>
+                                    </div> -->
                                     <div class="mb-3 col-md-6">
                                         <label for="nama_korban" class="form-label">Nama Korban</label>
                                         <input class="form-control" type="text" value="{{ $korban['nama_korban'] }}"

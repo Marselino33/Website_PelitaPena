@@ -27,6 +27,10 @@ class ContactController extends Controller
         Mail::to('dpmdppa@tobakab.go.id')
             ->send(new ContactMail($data));
 
-        return back()->with('success', 'Pesan Anda telah terkirim!');
+        return back()->with([
+    'success' => 'Pesan Anda telah terkirim!',
+    'data'    => $data
+]);
+
     }
 }

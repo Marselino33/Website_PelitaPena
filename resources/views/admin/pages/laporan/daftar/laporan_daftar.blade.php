@@ -17,8 +17,7 @@
     <input type="hidden" name="selected" id="selectedInput">
     <button style="background-color:green;" type="submit" class="btn btn-success btn-md rounded-pill d-flex align-items-center font-weight-bold px-4 py-2 shadow">Export</button>
 </form>
-<div class="d-flex justify-content-between align-items-center mb-3">
-  <h4 class="card-title">Daftar Semua Laporan</h4>
+
   <a href="{{ route('admin.laporan.create') }}" class="btn btn-primary">
     <i class="fas fa-plus-circle"></i> Tambah Laporan
   </a>
