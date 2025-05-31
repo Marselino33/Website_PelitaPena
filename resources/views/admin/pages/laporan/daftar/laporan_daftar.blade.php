@@ -8,20 +8,22 @@
         <div class="card-header bg-gradient-primary text-white p-4">
             <div class="d-flex justify-content-between align-items-center">
                 <h1 class="h4 font-weight-bold mb-0">Daftar Laporan</h1>
-                <div class="d-flex">
-                    <button type="button" id="filterButton" class="btn btn-warning btn-md rounded-pill mr-3 d-flex align-items-center font-weight-bold px-4 py-2 shadow">
+                <div class="d-flex gap-3 align-items-center">
+                    <button type="button" id="filterButton" class="btn btn-warning btn-md rounded-pill d-flex align-items-center font-weight-bold px-4 py-2 shadow">
                         <i class="fas fa-filter mr-2"></i> Filters
                     </button>
+                    
                     <!-- Export Form tetap GET sesuai route -->
-<form method="GET" action="{{ route('admin.laporan.export_pdf') }}" id="exportPdfForm">
-    <input type="hidden" name="selected" id="selectedInput">
-    <button style="background-color:green;" type="submit" class="btn btn-success btn-md rounded-pill d-flex align-items-center font-weight-bold px-4 py-2 shadow">Export</button>
-</form>
-
-  <a href="{{ route('admin.laporan.create') }}" class="btn btn-primary">
-    <i class="fas fa-plus-circle"></i> Tambah Laporan
-  </a>
-</div>
+                    <form method="GET" action="{{ route('admin.laporan.export_pdf') }}" id="exportPdfForm" class="mb-0">
+                        <input type="hidden" name="selected" id="selectedInput">
+                        <button type="submit" class="btn btn-success btn-md rounded-pill d-flex align-items-center font-weight-bold px-4 py-2 shadow">
+                            <i class="fas fa-download mr-2"></i> Export
+                        </button>
+                    </form>
+                    
+                    <a href="{{ route('admin.laporan.create') }}" class="btn btn-primary btn-md rounded-pill d-flex align-items-center font-weight-bold px-4 py-2 shadow">
+                        <i class="fas fa-plus-circle mr-2"></i> Tambah Laporan
+                    </a>
                 </div>
             </div>
         </div>
@@ -236,7 +238,7 @@
                 <div class="text-muted small">
                     Menampilkan {{ count($laporans) }} dari {{ count($laporans) }} laporan
                 </div>
-                <nav aria-label="Page navigation">
+                <!-- <nav aria-label="Page navigation">
                     <ul class="pagination pagination-sm">
                         <li class="page-item disabled">
                             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
@@ -248,7 +250,7 @@
                             <a class="page-link" href="#">Next</a>
                         </li>
                     </ul>
-                </nav>
+                </nav> -->
             </div>
         </div>
     </div>
@@ -272,6 +274,25 @@
     /* Gradient Header */
     .bg-gradient-primary {
         background: linear-gradient(45deg, #4e73df, #224abe);
+    }
+    
+    /* Button Container Spacing */
+    .d-flex.gap-3 {
+        gap: 1rem !important;
+    }
+    
+    /* Consistent Button Styling */
+    .btn-md {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.875rem;
+        line-height: 1.5;
+        border-radius: 50px;
+        min-width: 140px;
+        height: 42px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
     }
     
     /* Table Styling */
@@ -327,7 +348,7 @@
         box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
     }
     
-    /* Tombol Filter dan Export yang lebih menonjol */
+    /* Enhanced Button Hover Effects */
     .btn-warning {
         background-color: #f6c23e;
         border-color: #f6c23e;
@@ -338,19 +359,36 @@
         background-color: #e0a800;
         border-color: #d39e00;
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(246, 194, 62, 0.3);
+        box-shadow: 0 4px 12px rgba(246, 194, 62, 0.4);
+        color: #fff;
     }
     
     .btn-success {
         background-color: #1cc88a;
         border-color: #1cc88a;
+        color: #fff;
     }
     
     .btn-success:hover {
         background-color: #17a673;
         border-color: #169b6b;
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(28, 200, 138, 0.3);
+        box-shadow: 0 4px 12px rgba(28, 200, 138, 0.4);
+        color: #fff;
+    }
+    
+    .btn-primary {
+        background-color: #4e73df;
+        border-color: #4e73df;
+        color: #fff;
+    }
+    
+    .btn-primary:hover {
+        background-color: #2e59d9;
+        border-color: #2653d4;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(78, 115, 223, 0.4);
+        color: #fff;
     }
     
     /* Search Bar Styling */
@@ -419,6 +457,19 @@
         background-color: #4e73df;
         border-color: #4e73df;
     }
+    
+    /* Responsive Button Adjustments */
+    @media (max-width: 768px) {
+        .d-flex.gap-3 {
+            flex-direction: column;
+            gap: 0.5rem !important;
+        }
+        
+        .btn-md {
+            min-width: 100%;
+            margin-bottom: 0.5rem;
+        }
+    }
 </style>
 @endpush
 
@@ -440,6 +491,18 @@
             searchTimer = setTimeout(() => {
                 if ($(this).val().length >= 3) window.location.href = "{{ route('laporan.daftar') }}?q=" + $(this).val();
             }, 500);
+        });
+
+        // Select All functionality
+        $('#selectAll').change(function() {
+            $('.rowCheckbox').prop('checked', $(this).is(':checked'));
+        });
+
+        // Update Select All when individual checkboxes change
+        $('.rowCheckbox').change(function() {
+            const totalCheckboxes = $('.rowCheckbox').length;
+            const checkedCheckboxes = $('.rowCheckbox:checked').length;
+            $('#selectAll').prop('checked', totalCheckboxes === checkedCheckboxes);
         });
 
         // Export form: hanya kirim yang dicentang
@@ -496,12 +559,37 @@ document.getElementById('exportPdfForm').addEventListener('submit', function(e) 
     const selectedIds = Array.from(selectedCheckboxes).map(cb => cb.value);
 
     if (selectedIds.length === 0) {
-        alert('Pilih minimal satu laporan untuk diekspor!');
+        // Create a more styled alert
+        const alertDiv = document.createElement('div');
+        alertDiv.className = 'alert alert-warning alert-dismissible fade show';
+        alertDiv.style.cssText = 'position: fixed; top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        alertDiv.innerHTML = `
+            <strong><i class="fas fa-exclamation-triangle mr-2"></i> Perhatian!</strong> 
+            Pilih minimal satu laporan untuk diekspor!
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        `;
+        document.body.appendChild(alertDiv);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            if (alertDiv.parentNode) {
+                alertDiv.parentNode.removeChild(alertDiv);
+            }
+        }, 5000);
+        
         return;
     }
 
     // Simpan ID sebagai query string dalam input hidden
     document.getElementById('selectedInput').value = selectedIds.join(',');
+
+    // Show loading state
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalText = submitBtn.innerHTML;
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Memproses...';
+    submitBtn.disabled = true;
 
     // Lanjut submit
     this.submit();

@@ -261,11 +261,11 @@
                 <div class="tab-pane fade" id="navs-pills-justified-pelapor" role="tabpanel">
                     <h3 class="card-header">Data Pelapor</h3>
                     <div class="card-body">
-                        <div class="d-flex align-items-start align-items-sm-center gap-4">
+                        <!-- <div class="d-flex align-items-start align-items-sm-center gap-4">
                             <img src="{{ !empty($laporanDetailSelesai['Data']['User']['photo_profile']) ? $laporanDetailSelesai['Data']['User']['photo_profile'] : asset('asset-admin/assets/img/avatars/no_photo.png') }}"
                                 alt="user-avatar" class="d-block rounded" height="200" width="200"
                                 id="uploadedAvatar">
-                        </div>
+                        </div> -->
                     </div>
                     <hr class="my-0">
                     <div class="card-body">
@@ -290,11 +290,11 @@
                                     <input class="form-control" type="text" name="lastName" id="lastName"
                                         value="{{ $laporanDetailSelesai['User']['username'] }}">
                                 </div>
-                                <div class="mb-3 col-md-6">
+                                <!-- <div class="mb-3 col-md-6">
                                     <label for="lastName" class="form-label">NIK</label>
                                     <input class="form-control" type="text" name="lastName" id="lastName"
                                         value="{{ $laporanDetailSelesai['User']['nik'] }}">
-                                </div>
+                                </div> -->
                                 <div class="mb-3 col-md-6">
                                     <label for="email" class="form-label">E-mail</label>
                                     <div class="input-group input-group-merge">
@@ -307,11 +307,11 @@
                                             aria-describedby="basic-icon-default-email2">
                                     </div>
                                 </div>
-                                <div class="mb-3 col-md-6">
+                                <!-- <div class="mb-3 col-md-6">
                                     <label for="organization" class="form-label">Tempat, tanggal Lahir</label>
                                     <input type="text" class="form-control" id="organization" name="organization"
                                         value="{{ $laporanDetailSelesai['User']['tempat_lahir'] }}, {{ $laporanDetailSelesai['User']['tanggal_lahir'] }}">
-                                </div>
+                                </div> -->
                                 <div class="mb-3 col-md-6">
                                     <label class="form-label" for="phoneNumber">Nomor Handphone</label>
                                     <div class="input-group input-group-merge">
@@ -320,22 +320,22 @@
                                             value="{{ $laporanDetailSelesai['User']['phone_number'] }}">
                                     </div>
                                 </div>
-                                <div class="mb-3 col-md-6">
+                                <!-- <div class="mb-3 col-md-6">
                                     <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
                                     <input type="text" class="form-control"
                                         value="{{ $laporanDetailSelesai['User']['jenis_kelamin'] }}" id="jenis_kelamin"
                                         name="jenis_kelamin">
-                                </div>
-                                <div class="mb-3 col-md-6">
+                                </div> -->
+                                <!-- <div class="mb-3 col-md-6">
                                     <label for="state" class="form-label">Alamat</label>
                                     <input class="form-control" type="text" id="state" name="state"
                                         value="Alamat">
-                                </div>
-                                <div class="mb-3 col-md-6">
+                                </div> -->
+                                <!-- <div class="mb-3 col-md-6">
                                     <label for="zipCode" class="form-label">Zip Code</label>
                                     <input type="text" class="form-control" id="zipCode" name="zipCode"
                                         placeholder="231465" maxlength="6">
-                                </div>
+                                </div> -->
 
                             </div>
                         </form>
@@ -372,12 +372,12 @@
                                         <input class="form-control" type="text" value="{{ $korban['usia_korban'] }}"
                                             id="usia_korban" name="usia_korban" placeholder="contoh 21">
                                     </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
-                                        <input type="text" class="form-control"
-                                            value="{{ $korban['jenis_kelamin'] }}" id="jenis_kelamin"
-                                            name="jenis_kelamin">
-                                    </div>
+                                        <!-- <div class="mb-3 col-md-6">
+                                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                                            <input type="text" class="form-control"
+                                                value="{{ $korban['jenis_kelamin'] }}" id="jenis_kelamin"
+                                                name="jenis_kelamin">
+                                        </div> -->
                                     <div class="mb-3 col-md-6">
                                         <label for="agama" class="form-label">Agama</label>
                                         <input type="text" class="form-control" value="{{ $korban['agama'] }}"
@@ -429,31 +429,7 @@
                                         <textarea id="keterangan_lainnya" name="keterangan_lainnya" class="form-control"
                                             placeholder="adakah keterangan lain mengenai korban ini?">{{ $korban['keterangan_lainnya'] }}</textarea>
                                     </div>
-                                    <h5 class="card-header text-center">Alamat Korban</h5>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="provinsi" class="form-label">Provinsi</label>
-                                        <input class="form-control" type="text"
-                                            value="{{ $korban['alamat_korban'] }}" name="provinsi" id="provinsi">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="kabupaten" class="form-label">Kabupaten</label>
-                                        <input class="form-control" type="text"
-                                            value="{{ $korban['alamat_detail'] }}" name="kabupaten" id="kabupaten">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="kecamatan" class="form-label">Kecamatan</label>
-                                        <input class="form-control" type="text"
-                                            value="{{ $korban['alamat_korban'] }}" name="kecamatan" id="kecamatan">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label for="desa" class="form-label">Desa/Kelurahan</label>
-                                        <input class="form-control" type="text"
-                                            value="{{ $korban['alamat_detail'] }}" name="desa" id="desa">
-                                    </div>
-                                    <div class="mb-3 col-md-6">
-                                        <label class="form-label" for="alamat_detail">Alamat Detail</label>
-                                        <textarea id="alamat_detail" name="alamat_detail" class="form-control" placeholder="">{{ $korban['alamat_detail'] }}</textarea>
-                                    </div>
+                                    
                                 </div>
                             </form>
                         </div>
@@ -582,36 +558,7 @@
                                                                 for="basic-default-message">Keterangan lainnya</label>
                                                             <textarea id="basic-default-message" name="keterangan_lainnya" class="form-control" disabled>{{ $pelaku['keterangan_lainnya'] }}</textarea>
                                                         </div>
-                                                        <h5 class="card-header text-center">Alamat Pelaku</h5>
-                                                        @php
-                                                            $alamatPelaku = explode(',', $pelaku['alamat_pelaku']);
-                                                        @endphp
-                                                        <div class="mb-3 col-md-6">
-                                                            <label for="provinsi" class="form-label">Provinsi</label>
-                                                            <input class="form-control" type="text" name="provinsi"
-                                                                id="provinsi" value="{{ $alamatPelaku[0] }}">
-                                                        </div>
-                                                        <div class="mb-3 col-md-6">
-                                                            <label for="kabupaten" class="form-label">Kabupaten</label>
-                                                            <input class="form-control" type="text" name="kabupaten"
-                                                                id="kabupaten" value="{{ $alamatPelaku[1] }}">
-                                                        </div>
-                                                        <div class="mb-3 col-md-6">
-                                                            <label for="kecamatan" class="form-label">Kecamatan</label>
-                                                            <input class="form-control" type="text" name="kecamatan"
-                                                                id="kecamatan" value="{{ $alamatPelaku[2] }}">
-                                                        </div>
-                                                        <div class="mb-3 col-md-6">
-                                                            <label for="desa"
-                                                                class="form-label">Desa/Kelurahan</label>
-                                                            <input class="form-control" type="text" name="desa"
-                                                                id="desa" value="{{ $alamatPelaku[3] }}">
-                                                        </div>
-                                                        <div class="mb-3 col-md-6">
-                                                            <label class="form-label" for="basic-default-message">Alamat
-                                                                Detail</label>
-                                                            <textarea id="basic-default-message" name="alamat_detail" class="form-control" placeholder="">{{ $pelaku['alamat_detail'] }}</textarea>
-                                                        </div>
+                                                        
                                                     </div>
                                                 </form>
                                             </div>

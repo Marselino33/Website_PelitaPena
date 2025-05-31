@@ -5,7 +5,7 @@
             <div class="col-md-2 text-center text-md-start mb-4 mb-md-0">
                 <!-- Logo -->
                 <img src="assets/img/logo/new_logo2.png" alt="SIGAP" width="120" />
-                <span style="margin-left:-3px; font-size: 22px; font-weight: bold; color: #2d3e69;">SIGAP</span>
+                <span style="margin-left:0px; font-size: 22px; font-weight: bold; color: #2d3e69;">SIGAP</span>
                 
                 <!-- Tombol Download (di bawah logo) -->
                 <div>
